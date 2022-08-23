@@ -5,17 +5,20 @@ namespace App\Services\Domain\SeederDataService;
 use App\Http\Requests\PermissionsStoreRequest;
 use Spatie\Permission\Models\Permission;
 
-class PermisionService
+class PermissionService
 {
-    public function store(PermissionsStoreRequest $request)
+    public function store()
     {
-        $request->validate([
-            'name' => 'required|unique:users,name'
-        ]);
+        $permissionsArr = [
+            'role-list',
+            'role-create',
+            'role-edit',
+            'role-delete'
+        ];
 
-        Permission::create($request->only('name'));
-
-        return redirect()->route('permissions.index')
-            ->withSuccess(__('Permission created successfully.'));
+        foreach($permissionsArr as $permissions)
+        {
+            Permission::create(['name' => $permissions ]);
+        }
     }
 }

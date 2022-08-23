@@ -7,7 +7,7 @@ use Spatie\Permission\Models\Role;
 class RoleService
 {
 
-    private function store()
+    public function store()
     {
         $role = Role::create(['name' => 'Administrator']);
         $role->syncPermissions([1,2,3,4]);
